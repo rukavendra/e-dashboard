@@ -9,7 +9,7 @@ const createWorkout = async (req, res) => {
       reps,
       load,
     });
-    res.status(201).json(result);
+    res.status(200).json(result);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -39,7 +39,7 @@ const getSingleWorkout = async (req, res) => {
 };
 
 
-//  updating workout
+// deleting workout
 const deleteWorkout = async (req, res) => {
     const searchId = req.params.id
   try {
@@ -51,13 +51,13 @@ const deleteWorkout = async (req, res) => {
   }
 };
 
-//  deleting workout
+// updating workout 
 const updateWorkout = async (req, res) => {
     const searchId = req.params.id
   try {
     const results = await Workout.findOneAndUpdate({_id: searchId},{...req.body});
     if(!results) return res.status(400).json({error: "No such workout "})
-    res.status(201).json({message: `workout updated`});
+    res.status(200).json({message: `workout updated`});
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

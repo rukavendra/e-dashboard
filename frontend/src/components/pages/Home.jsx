@@ -1,20 +1,22 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect,} from 'react'
 import WorkoutDetails from '../workoutDetails/workoutDetails'
+import Workoutform from '../forms/workoutform'
+import { useWorkoutsContext } from '../../context/hooks/useWorkoutsContext'
 
 const Home = () => {
-    const [workouts, setWorkouts]= useState(null)
+    const {workouts,dispatch}= useWorkoutsContext()
     useEffect(()=>{
         fetch('/workouts')
         .then((res)=>res.json())
         .then(res=>{
-                setWorkouts(res)
+                dispatch({type:'SET_WORKOUTS', payload: res})
         })
         .catch(err=>console.log(err))
 
-    },[])
-  return (
-    <div className='home'>
-        <h2>Home</h2>
+    },[dispatch])
+  return (<div className='flex flex-col md:flex-row-reverse'>
+    <Workoutform/>
+    <div className='home flex flex-col md:w-screen'>
         {workouts?
             (<div>
                 {workouts.map(workout=>(
@@ -23,6 +25,7 @@ const Home = () => {
             </div>)
             :<h3>Data Not Loaded</h3>
         }
+    </div>
     </div>
   )
 }

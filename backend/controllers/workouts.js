@@ -45,7 +45,7 @@ const deleteWorkout = async (req, res) => {
   try {
     const results = await Workout.findOneAndDelete(searchId);
     if(!results) return res.status(400).json({error: "No such workout "})
-    res.status(200).json({message: `workout removed`});
+    res.status(200).json(results);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

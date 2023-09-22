@@ -3,6 +3,20 @@ const Workout = require("../models/workouts");
 // creating workout
 const createWorkout = async (req, res) => {
   const { title, reps, load } = req.body;
+  let emptyFields = []
+
+  if(!title) {
+    emptyFields.push(title)
+  }
+  if(!reps) {
+    emptyFields.push(reps)
+  }
+  if(!load) {
+    emptyFields.push(load)
+  }
+
+  if(emptyFields.length > 0) return res.status(400).json({error: 'Please Fill all The Fields'})
+
   try {
     const result = await Workout.create({
       title,
@@ -43,7 +57,8 @@ const getSingleWorkout = async (req, res) => {
 const deleteWorkout = async (req, res) => {
     const searchId = req.params.id
   try {
-    const results = await Workout.findOneAndDelete(searchId);
+    // const results = await Workout.findByIdAndDelete(searchId);
+    const results = await Workout.findOneAndDelete({_id:searchId});
     if(!results) return res.status(400).json({error: "No such workout "})
     res.status(200).json(results);
   } catch (error) {

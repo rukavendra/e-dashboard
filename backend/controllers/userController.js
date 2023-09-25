@@ -18,7 +18,7 @@ const signUpUser = async(req,res)=>{
     }catch(error){
         res.status(400).json({error: error.message})
     }
-    res.json({message: 'SignUp'})
+    // res.json({message: 'SignUp'})
 }
 
 

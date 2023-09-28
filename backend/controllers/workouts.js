@@ -72,7 +72,7 @@ const updateWorkout = async (req, res) => {
   try {
     const results = await Workout.findOneAndUpdate({_id: searchId},{...req.body});
     if(!results) return res.status(400).json({error: "No such workout "})
-    res.status(200).json({message: `workout updated`});
+    res.status(200).json(results);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

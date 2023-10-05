@@ -4,7 +4,7 @@ const User = require('../models/useModel')
 
 const authRequired = async (req, res, next)=>{
 
-    // Authenticate the user
+    // Authenticate the user 
     const {authorization}= req.headers
     if(!authorization){
         res.status(401).json({error: "You must be logged in."})

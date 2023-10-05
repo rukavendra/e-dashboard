@@ -3,6 +3,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 // const cors = require('cors')
 const workoutRoutes = require('./routes/workouts')
+const userRoutes = require('./routes/user')
 
 const app = express()
 
@@ -18,6 +19,7 @@ app.use((req,res,next)=>{
 
 // route
 app.use('/workouts',workoutRoutes)
+app.use('/user',userRoutes)
 
 mongoose.connect(process.env.MONGO_URI)
 .then(()=>console.log("DB Access granted"))

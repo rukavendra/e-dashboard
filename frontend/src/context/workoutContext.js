@@ -13,6 +13,9 @@ export const workoutReducer = (state,action)=>{
         case 'DELETE_WORKOUT':
             return {workouts: state.workouts.filter(workout=>workout._id!==action.payload._id)}
 
+        case 'UPDATE_WORKOUT':
+            return {workouts: [...state.workouts,state.workouts.filter(workout=>workout._id===action.payload._id)]}
+
         default:
             return state
     }

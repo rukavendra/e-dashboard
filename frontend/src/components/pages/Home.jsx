@@ -2,18 +2,21 @@ import React, {useEffect,} from 'react'
 import WorkoutDetails from '../workoutDetails/workoutDetails'
 import Workoutform from '../forms/workoutform'
 import { useWorkoutsContext } from '../../context/hooks/useWorkoutsContext'
+import {useAuthContext} from '../../context/hooks/useAuthContext'
 
 const Home = () => {
     const {workouts,dispatch}= useWorkoutsContext()
+    const {user}= useAuthContext()
     useEffect(()=>{
-        fetch('/workouts')
+        if(user){
+        fetch('/workouts',{headers: {'Authorization': `Bearer ${user.token}`}})
         .then((res)=>res.json())
         .then(res=>{
                 dispatch({type:'SET_WORKOUTS', payload: res})
         })
-        .catch(err=>console.log(err))
+        .catch(err=>console.log(err))}
 
-    },[dispatch])
+    },[dispatch,user])
   return (<div className='flex flex-col md:flex-row-reverse'>
     <Workoutform/>
     <div className='home flex flex-col md:w-screen'>
@@ -23,7 +26,7 @@ const Home = () => {
                    <WorkoutDetails key={workout._id} workout={workout} />
                 ))}
             </div>)
-            :<h3>Data Not Loaded</h3>
+            :<div></div>
         }
     </div>
     </div>

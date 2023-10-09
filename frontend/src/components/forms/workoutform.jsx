@@ -19,7 +19,7 @@ const Workoutform = () => {
           return
         }
 
-        const response = await fetch('https://workout-buddy-ten.vercel.app/workouts/', {
+        const response = await fetch('https://workout-buddy-ten.vercel.app/workouts', {
             method: "POST",
             body: JSON.stringify(workout),
             headers:{

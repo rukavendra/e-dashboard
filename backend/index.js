@@ -10,7 +10,7 @@ const app = express()
 
 //Middle ware
 app.use(cors({
-    origin: 'https://workout-buddy-ten.vercel.app',
+    origin: 'https://workout-buddy-app-tau.vercel.app',
     methods: 'GET,POST,PUT,DELETE',
     credentials: true,
 
